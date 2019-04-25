@@ -4,7 +4,7 @@
 // runtime test reporter in console https://www.npmjs.com/package/jasmine-spec-reporter
 const {SpecReporter} = require('jasmine-spec-reporter/built/main');
 // html test reporter https://www.npmjs.com/package/protractor-jasmine2-html-reporter
-let Jasmine2HtmlReporter = require('protractor-jasmine2-html-reporter');
+let HtmlReporter = require('protractor-beautiful-reporter');
 
 module.exports.config = {
     allScriptsTimeout: 11000,
@@ -45,7 +45,6 @@ module.exports.config = {
 
     // when uncommented, protractor is the only global variable, so no confusion for $
     // noGlobals: true,
-
     onPrepare() {
         // disabled waiting for angular on the page
         // https://www.protractortest.org/#/api?view=ProtractorBrowser.prototype.waitForAngularEnabled
@@ -56,10 +55,13 @@ module.exports.config = {
             project: 'tsconfig.json',
         });
         // initialize html reporter
-        jasmine.getEnv().addReporter(new Jasmine2HtmlReporter({
-          savePath: 'out',
-          fileName: 'index',
-        }));
+        jasmine.getEnv().addReporter(new HtmlReporter({
+            baseDirectory: 'src/e2e/out',
+            screenshotsSubfolder: 'images',
+            gatherBrowserLogs: 'true',
+            preserveDirectory: false,
+        }).getJasmine2Reporter());
+
         // initialize runtime console reporter
         jasmine.getEnv().addReporter(new SpecReporter({spec: {displayStacktrace: true}}));
     }
