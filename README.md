@@ -1,6 +1,9 @@
 # protractor-cheat-sheet
 Setting up e2e tests with protractor with 
-typescript, jasmine, jasmine html+screenshot reporter, direct connect to chrome
+* typescript (commonjs / es2017)
+* jasmine
+* protractor-beautiful-reporter
+* chrome direct connect
 
 sample tests will open google start page and search for cats and goats
 
